@@ -8,7 +8,7 @@
 #include <opengm/graphicalmodel/space/discretespace.hxx>
 #include <opengm/graphicalmodel/graphicalmodel_hdf5.hxx>
 #include <opengm/functions/explicit_function.hxx>
-#include <opengm/functions/sparsemarray.hxx>
+//#include <opengm/functions/sparsemarray.hxx>
 #include <opengm/utilities/metaprogramming.hxx>
 
 #include <opengm/inference/visitors/visitors.hxx>
@@ -29,8 +29,8 @@
 
 // CANONICAL DEFS
 typedef opengm::meta::TypeListGenerator<
-    opengm::ExplicitFunction<double>,
-    opengm::SparseMarray<double>
+    opengm::ExplicitFunction<double>//,
+    //opengm::SparseMarray<double>
 >::type FunctionTypeList; 
 typedef opengm::DiscreteSpace<> Space;
 typedef opengm::GraphicalModel<double, opengm::Multiplier, FunctionTypeList, Space> Model;
