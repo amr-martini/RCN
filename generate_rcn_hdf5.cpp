@@ -350,6 +350,7 @@ int main(int argc, char *argv[]){
     int alpha = 2; // note that here it is an int, and here it is half the value as defined in the paper
     double beta = 0.1;
     double gamma = 0.1;
+    double off_score = 0.1;
 
     
     
@@ -576,15 +577,15 @@ int main(int argc, char *argv[]){
     // type2 means feature is activated if pool takes on state 2 (right-child)
     size_t f_feature_pool_shape[] = {2,3};
     opengm::ExplicitFunction<double> f_feature_pool_type1(f_feature_pool_shape,f_feature_pool_shape+2,1);
-    f_feature_pool_type1(0,1) = 0;
-    f_feature_pool_type1(1,0) = 0;
-    f_feature_pool_type1(1,2) = 0;
+    f_feature_pool_type1(0,1) = off_score;
+    f_feature_pool_type1(1,0) = off_score;
+    f_feature_pool_type1(1,2) = off_score;
     RCN::FunctionIdentifier fid_feature_pool_type1 = gm.addFunction(f_feature_pool_type1);
     
     opengm::ExplicitFunction<double> f_feature_pool_type2(f_feature_pool_shape,f_feature_pool_shape+2,1);
-    f_feature_pool_type2(0,2) = 0;
-    f_feature_pool_type2(1,0) = 0;
-    f_feature_pool_type2(1,1) = 0;
+    f_feature_pool_type2(0,2) = off_score;
+    f_feature_pool_type2(1,0) = off_score;
+    f_feature_pool_type2(1,1) = off_score;
     RCN::FunctionIdentifier fid_feature_pool_type2 = gm.addFunction(f_feature_pool_type2);
     
     
@@ -593,7 +594,7 @@ int main(int argc, char *argv[]){
     cout << "Beginning constructing pool-feature binary" << endl << endl;
 
     size_t f_pool_feature_shape[] = {3,2};
-    opengm::ExplicitFunction<double> f_pool_feature(f_pool_feature_shape,f_pool_feature_shape+2,0);
+    opengm::ExplicitFunction<double> f_pool_feature(f_pool_feature_shape,f_pool_feature_shape+2,off_score);
     f_pool_feature(0,0) = 1;
     f_pool_feature(1,1) = 1;
     f_pool_feature(2,1) = 1;
@@ -609,10 +610,10 @@ int main(int argc, char *argv[]){
     size_t f_top_level_shape[] = {2,2};
     opengm::ExplicitFunction<double> f_top_level_type1(f_top_level_shape,f_top_level_shape+2,1);
     opengm::ExplicitFunction<double> f_top_level_type2(f_top_level_shape,f_top_level_shape+2,1);
-    f_top_level_type1(0,0) = 0;
-    f_top_level_type1(1,1) = 0;
-    f_top_level_type2(0,1) = 0;
-    f_top_level_type2(1,0) = 0;
+    f_top_level_type1(0,0) = off_score;
+    f_top_level_type1(1,1) = off_score;
+    f_top_level_type2(0,1) = off_score;
+    f_top_level_type2(1,0) = off_score;
     RCN::FunctionIdentifier fid_top_level_type1 = gm.addFunction(f_top_level_type1);
     RCN::FunctionIdentifier fid_top_level_type2 = gm.addFunction(f_top_level_type2);
     
